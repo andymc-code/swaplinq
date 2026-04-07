@@ -1,47 +1,41 @@
-const API_KEY = import.meta.env.VITE_CHANGENOW_API_KEY;
-const BASE_URL = 'https://api.changenow.io/v1';
-
 export const changeNowApi = {
-    getMinAmount: async (from, to) => {
+    _callProxy: async (action, payload) => {
         try {
-            const res = await fetch(`${BASE_URL}/min-amount/${from}_${to}?api_key=${API_KEY}`);
-            return await res.json();
-        } catch (error) {
-            console.error("Error fetching min amount:", error);
-            throw error;
-        }
-    },
-    getEstimatedAmount: async (amount, from, to) => {
-        try {
-            const res = await fetch(`${BASE_URL}/exchange-amount/${amount}/${from}_${to}?api_key=${API_KEY}`);
-            return await res.json();
-        } catch (error) {
-            console.error("Error fetching estimated amount:", error);
-            throw error;
-        }
-    },
-    createTransaction: async (data) => {
-        try {
-            const res = await fetch(`${BASE_URL}/transactions/${API_KEY}`, {
+            const res = await fetch('/api/changenow', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action, payload })
             });
-            return await res.json();
+
+            const data = await res.json();
+
+            if (res.status === 429) {
+                return { error: 'Rate limit exceeded. Please wait a moment.', isError: true };
+            }
+            if (!res.ok) {
+                return { error: data.error || 'API request failed' };
+            }
+
+            return data;
         } catch (error) {
-            console.error("Error creating transaction:", error);
+            console.error(`Error in proxy call [${action}]:`, error);
             throw error;
         }
     },
+
+    getMinAmount: async (from, to) => {
+        return await changeNowApi._callProxy('min-amount', { from, to });
+    },
+    
+    getEstimatedAmount: async (amount, from, to) => {
+        return await changeNowApi._callProxy('exchange-amount', { amount, from, to });
+    },
+    
+    createTransaction: async (data) => {
+        return await changeNowApi._callProxy('create-transaction', { data });
+    },
+    
     getTransactionStatus: async (id) => {
-        try {
-            const res = await fetch(`${BASE_URL}/transactions/${id}/${API_KEY}`);
-            return await res.json();
-        } catch (error) {
-            console.error("Error fetching transaction status:", error);
-            throw error;
-        }
+        return await changeNowApi._callProxy('transaction-status', { id });
     }
 };
