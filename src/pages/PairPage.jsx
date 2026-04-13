@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import { ArrowRight, Info, Zap, Shield, ChevronLeft, TrendingUp } from 'lucide-react';
-import SEO from '../components/SEO';
+import SEO, { buildBreadcrumbSchema } from '../components/SEO';
 import CustomSwapWidget from '../components/CustomSwapWidget';
 import { PROVIDERS, DEFAULT_PROVIDER } from '../config/providers';
 
@@ -15,11 +15,22 @@ const PairPage = ({ type }) => {
     // Parse pairId if it exists (e.g., eth-btc)
     const [fromCoin, toCoin] = pairId ? pairId.split('-') : ['btc', 'eth'];
     const title = type === 'buy' ? 'Buy Crypto with Fiat' : type === 'sell' ? 'Sell Crypto for Fiat' : `${fromCoin.toUpperCase()} to ${toCoin.toUpperCase()} Exchange`;
-    const desc = `Exchange ${fromCoin.toUpperCase()} to ${toCoin.toUpperCase()} instantly with Swaplinq. No registration required, fast and secure crypto swaps.`;
+    const desc = `Exchange ${fromCoin.toUpperCase()} to ${toCoin.toUpperCase()} instantly on SwaplinQ — the leading non-custodial crypto exchange. No KYC, no registration required. Best rates from 10+ liquidity providers, average swap time under 5 minutes.`;
 
     return (
         <div className="page-container pair-page-container">
-            <SEO title={title} description={desc} />
+            <SEO 
+                title={title} 
+                description={desc}
+                keywords={`${fromCoin.toUpperCase()} to ${toCoin.toUpperCase()}, swap ${fromCoin.toUpperCase()}, exchange ${fromCoin.toUpperCase()} ${toCoin.toUpperCase()}, convert ${fromCoin.toUpperCase()}, SwaplinQ pair, non-custodial swap`}
+                jsonLd={[
+                    buildBreadcrumbSchema([
+                        { name: 'SwaplinQ', url: 'https://swaplinq.com' },
+                        { name: 'Exchange', url: 'https://swaplinq.com' },
+                        { name: `${fromCoin.toUpperCase()} → ${toCoin.toUpperCase()}`, url: `https://swaplinq.com/pair/${fromCoin}-${toCoin}` }
+                    ])
+                ]}
+            />
             
             <header className="page-header coin-details-header">
                 <Link to="/" className="back-link">

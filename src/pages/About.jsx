@@ -5,7 +5,7 @@ import {
   Globe, Zap, ArrowRight, Layers, GitBranch, Server, ShieldCheck, Eye,
   TrendingUp, Clock, Database, Network, Fingerprint, Terminal
 } from 'lucide-react';
-import SEO from '../components/SEO';
+import SEO, { buildBreadcrumbSchema } from '../components/SEO';
 import { motion } from 'framer-motion';
 
 const fadeUp = {
@@ -20,7 +20,14 @@ const About = () => {
         <div className="page-container about-page">
             <SEO 
                 title="About Us - Architecture & Mission" 
-                description="Learn about Swaplinq, our non-custodial architecture, liquidity aggregation algorithms, and our strict privacy-first stance." 
+                description="SwaplinQ is a privacy-first, non-custodial smart routing protocol. Learn about our architecture, liquidity aggregation engine querying 10+ providers in <50ms, zero-knowledge execution model, and mission to build permissionless financial infrastructure."
+                keywords="SwaplinQ architecture, non-custodial exchange protocol, liquidity aggregation, smart routing engine, privacy-first crypto, zero-knowledge execution, permissionless finance"
+                jsonLd={[
+                    buildBreadcrumbSchema([
+                        { name: 'SwaplinQ', url: 'https://swaplinq.com' },
+                        { name: 'About', url: 'https://swaplinq.com/about' }
+                    ])
+                ]}
             />
             
             {/* ─── Hero Header ─── */}

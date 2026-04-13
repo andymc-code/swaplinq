@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Zap, Shield, TrendingUp, Info, ChevronLeft } from 'lucide-react';
-import SEO from '../components/SEO';
+import SEO, { buildBreadcrumbSchema } from '../components/SEO';
 import { SUPPORTED_COINS } from '../config/coins';
 
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
@@ -13,11 +13,22 @@ const CoinPage = () => {
 
 
     const title = `${coin.name} (${coin.symbol}) - Swap & Exchange`;
-    const desc = `Exchange ${coin.name} instantly on Swaplinq. Quick, secure, and zero registration needed for all your cryptocurrency needs.`;
+    const desc = `Exchange ${coin.name} (${coin.symbol}) instantly on SwaplinQ — the leading non-custodial crypto exchange. No KYC, no registration. Best rates aggregated from 10+ liquidity providers. Swap ${coin.symbol} to BTC, ETH, XMR, USDT and 1,500+ other assets.`;
 
     return (
         <div className="page-container">
-            <SEO title={title} description={desc} />
+            <SEO 
+                title={title} 
+                description={desc}
+                keywords={`${coin.name}, ${coin.symbol}, swap ${coin.symbol}, exchange ${coin.name}, ${coin.symbol} to BTC, ${coin.symbol} to ETH, buy ${coin.name}, SwaplinQ ${coin.symbol}`}
+                jsonLd={[
+                    buildBreadcrumbSchema([
+                        { name: 'SwaplinQ', url: 'https://swaplinq.com' },
+                        { name: 'Coins', url: 'https://swaplinq.com/coins' },
+                        { name: `${coin.name} (${coin.symbol})`, url: `https://swaplinq.com/coins/${coin.id}` }
+                    ])
+                ]}
+            />
 
 
             

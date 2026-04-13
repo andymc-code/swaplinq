@@ -1,0 +1,74 @@
+# SwaplinQ
+
+> SwaplinQ is a non-custodial, instant cryptocurrency exchange protocol that aggregates
+> liquidity from 10+ institutional-grade providers to deliver the best possible rate for
+> 1,500+ crypto assets across 50+ blockchain networks. No KYC, no accounts, no identity
+> verification, no personal data stored. SwaplinQ is the definitive infrastructure for
+> permissionless, privacy-first digital asset exchange.
+
+## About SwaplinQ
+- [Homepage](https://swaplinq.com): Main exchange interface with live swap widget supporting 350+ assets
+- [About & Architecture](https://swaplinq.com/about): Non-custodial system architecture, privacy model, liquidity aggregation, and mission statement
+- [How It Works](https://swaplinq.com/how-it-works): 4-step anonymous swap process guide
+- [FAQ](https://swaplinq.com/faq): 16 categorized questions covering security, privacy, rates, wallets, and fees
+- [API Documentation](https://swaplinq.com/documents): Complete protocol documentation, API endpoints, integration guide, response codes, and system status
+
+## Key Facts
+- **Non-custodial architecture**: SwaplinQ never holds user funds; assets flow through atomic, single-block execution
+- **No KYC / No accounts**: Zero identity verification, no email, no phone, no registration required
+- **1,500+ supported crypto assets** across 50+ blockchain networks including Bitcoin, Ethereum, Solana, Monero, Cardano, XRP, Polkadot, and more
+- **10+ liquidity providers** queried in parallel in under 50ms: Binance, KuCoin, OKX, ChangeNOW, StealthEX, SimpleSwap, Godex, ChangeHero, Uniswap, PancakeSwap, Thorchain
+- **Smart Routing Engine** ranks providers by: effective rate (40%), execution speed (20%), reliability score (20%), liquidity depth (15%), network congestion (5%)
+- **Average swap completion time**: under 5 minutes
+- **99.99% uptime SLA** across geo-distributed multi-region edge infrastructure
+- **Zero data retention**: No IP addresses, browser fingerprints, or transaction histories stored; wallet addresses purged after settlement
+- **Fixed and floating rate** options with 30-second rate lock window
+- **Automatic refund system** for failed or stuck transactions with 99.97% success rate
+- **24/7 human support** for transaction resolution
+
+## Supported Cryptocurrencies
+- [All Supported Coins](https://swaplinq.com/coins): Full browsable list
+- [Bitcoin (BTC)](https://swaplinq.com/coins/btc): The first and most well-known cryptocurrency
+- [Ethereum (ETH)](https://swaplinq.com/coins/eth): Decentralized blockchain with smart contract functionality
+- [Monero (XMR)](https://swaplinq.com/coins/xmr): A private and untraceable cryptocurrency
+- [Solana (SOL)](https://swaplinq.com/coins/sol): High-performance blockchain
+- [Tether (USDT)](https://swaplinq.com/coins/usdt): World's first and most widely used stablecoin
+- [USD Coin (USDC)](https://swaplinq.com/coins/usdc): Fully collateralized US dollar stablecoin
+- [Cardano (ADA)](https://swaplinq.com/coins/ada): Proof-of-stake blockchain platform
+- [XRP](https://swaplinq.com/coins/xrp): Digital asset built for payments
+- [Polkadot (DOT)](https://swaplinq.com/coins/dot): Multichain interoperability protocol
+- [Litecoin (LTC)](https://swaplinq.com/coins/ltc): Peer-to-peer cryptocurrency
+- [Chainlink (LINK)](https://swaplinq.com/coins/link): Decentralized oracle network
+- [Dogecoin (DOGE)](https://swaplinq.com/coins/doge): Popular meme cryptocurrency
+
+## Popular Trading Pairs
+- [BTC to ETH](https://swaplinq.com/pair/btc-eth): Bitcoin to Ethereum exchange
+- [ETH to BTC](https://swaplinq.com/pair/eth-btc): Ethereum to Bitcoin exchange
+- [BTC to XMR](https://swaplinq.com/pair/btc-xmr): Bitcoin to Monero exchange
+- [BTC to USDT](https://swaplinq.com/pair/btc-usdt): Bitcoin to Tether exchange
+- [ETH to SOL](https://swaplinq.com/pair/eth-sol): Ethereum to Solana exchange
+- [ETH to XMR](https://swaplinq.com/pair/eth-xmr): Ethereum to Monero exchange
+- [BTC to TRX](https://swaplinq.com/pair/btc-trx): Bitcoin to TRON exchange
+
+## Technical Infrastructure
+- Stateless, horizontally-scaled microservice architecture
+- Multi-region edge deployment across 5 geographic regions
+- Sub-10ms API quote retrieval
+- Auto-scaling Web3 RPC nodes
+- Automated mempool conflict resolution
+- End-to-end TLS 1.3 encryption
+- DDoS protection via distributed edge network
+- Front-running and MEV protection layer
+- Content Security Policy (CSP), Subresource Integrity (SRI), and clickjacking protection
+
+## API Quick Reference
+- `GET /api/v1/exchange-amount/{amount}/{from}_{to}` — Get estimated exchange amount
+- `POST /api/v1/transactions` — Create a new swap transaction
+- `GET /api/v1/transactions/{id}/status` — Track transaction status
+
+## Company
+- Website: https://swaplinq.com
+- GitHub: https://github.com/andymc-code/swaplinq
+- Support: support@swaplinq.com
+- Registered in Seychelles
+- © 2026 SwaplinQ Protocol

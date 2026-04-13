@@ -123,8 +123,37 @@ const Documents = () => {
     return (
         <div className="docs-page-wrapper">
             <Helmet>
-                <title>Swaplinq Documentation — Architecture, API & Protocol</title>
-                <meta name="description" content="Complete technical documentation for the Swaplinq non-custodial exchange protocol. Architecture, API reference, liquidity engine, smart routing, and security model." />
+                <title>SwaplinQ Documentation — Architecture, API & Protocol</title>
+                <meta name="description" content="Complete technical documentation for the SwaplinQ non-custodial exchange protocol. Architecture overview, smart routing engine, liquidity aggregation, API reference with endpoints, privacy model, and integration guide for developers." />
+                <meta name="keywords" content="SwaplinQ API, crypto exchange API, non-custodial exchange documentation, swap API endpoints, liquidity aggregation docs, smart routing protocol" />
+                <link rel="canonical" href="https://swaplinq.com/documents" />
+                <meta property="og:title" content="SwaplinQ Documentation — Architecture, API & Protocol" />
+                <meta property="og:description" content="Complete technical documentation for the SwaplinQ non-custodial exchange protocol." />
+                <meta property="og:url" content="https://swaplinq.com/documents" />
+                <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "TechArticle",
+                    "headline": "SwaplinQ Protocol Documentation",
+                    "description": "Complete technical documentation for the SwaplinQ non-custodial exchange protocol. Covers architecture, smart routing, liquidity engine, API endpoints, security model, and integration guide.",
+                    "author": { "@type": "Organization", "name": "SwaplinQ" },
+                    "publisher": { "@type": "Organization", "name": "SwaplinQ" },
+                    "url": "https://swaplinq.com/documents",
+                    "datePublished": "2026-01-01",
+                    "dateModified": "2026-04-13",
+                    "mainEntityOfPage": "https://swaplinq.com/documents"
+                })}
+                </script>
+                <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        { "@type": "ListItem", "position": 1, "name": "SwaplinQ", "item": "https://swaplinq.com" },
+                        { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://swaplinq.com/documents" }
+                    ]
+                })}
+                </script>
             </Helmet>
 
             {/* ─── Mobile Sidebar Toggle ─── */}

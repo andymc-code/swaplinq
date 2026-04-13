@@ -20,7 +20,7 @@ import {
   CheckCircle2,
   Sparkles
 } from 'lucide-react';
-import SEO from '../components/SEO';
+import SEO, { buildFAQSchema, buildHowToSchema } from '../components/SEO';
 import CustomSwapWidget from '../components/CustomSwapWidget';
 
 import SystemStatusBadge from '../components/SystemStatusBadge';
@@ -168,9 +168,36 @@ const FloatingOrb = ({ size, color, top, left, delay }) => (
 
 const Home = () => {
 
+    const homeFaqItems = [
+        { q: "Do I really need absolutely no account or ID?", a: "Yes. SwaplinQ is a strict non-KYC, non-custodial exchange. You will never be asked to provide identifying documents, email addresses, or phone numbers to swap your assets." },
+        { q: "How long does a typical swap take to complete?", a: "Most swaps are completed within 2 to 10 minutes. The exact duration depends on the block time and network congestion of the specific blockchains you are trading across." },
+        { q: "Are there any maximum trading limits?", a: "No. Since SwaplinQ does not employ traditional custodial accounts, there are no tiered verification limits. You can execute swaps of virtually any size." },
+        { q: "What happens if I send the wrong amount or the swap fails?", a: "SwaplinQ employs precise auto-refund parameters. If your deposit underpays the required network fees, or if extreme volatility causes a rate failure, your funds are automatically returned." },
+        { q: "Is my transaction completely untraceable?", a: "SwaplinQ does not store user IP addresses, browser fingerprints, or transaction histories. For absolute anonymity, we recommend utilizing privacy coins like Monero (XMR)." }
+    ];
+
+    const howToSteps = [
+        { title: "Select Your Pair", desc: "Choose the cryptocurrency you want to exchange and the asset you'd like to receive. Enter the amount to see an instant estimate for your anonymous swap." },
+        { title: "Enter Your Address", desc: "Provide the recipient's wallet address for the asset you want to receive." },
+        { title: "Send Your Coins", desc: "Send the exact amount of the original asset to the deposit address provided by SwaplinQ." },
+        { title: "Receive Your Assets", desc: "Our smart routing system swaps your coins at the best rate and sends them directly to your wallet in minutes." }
+    ];
+
     return (
         <>
-            <SEO title="Swap BTC, ETH, XMR Instant & Anonymous" />
+            <SEO 
+                title="Swap BTC, ETH, XMR Instant & Anonymous" 
+                description="SwaplinQ is the leading non-custodial instant cryptocurrency exchange. Swap 1,500+ assets with no KYC, no accounts. Best rates from 10+ liquidity providers. Average swap time under 5 minutes."
+                keywords="SwaplinQ, instant crypto swap, non-custodial exchange, no KYC, anonymous crypto exchange, Bitcoin swap, Ethereum exchange, Monero swap, best crypto rates, privacy exchange"
+                jsonLd={[
+                    buildFAQSchema(homeFaqItems),
+                    buildHowToSchema(
+                        "How to Swap Crypto on SwaplinQ Without KYC",
+                        "Exchange any cryptocurrency instantly on SwaplinQ with no registration, no KYC, and no accounts required. Follow these 4 simple steps.",
+                        howToSteps
+                    )
+                ]}
+            />
 
             {/* ─── HERO ─── */}
             <section className="hero">

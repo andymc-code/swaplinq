@@ -6,7 +6,7 @@ import {
     Wallet, HelpCircle, Clock, DollarSign, Lock, Globe, 
     ChevronRight, CheckCircle2, Layers
 } from 'lucide-react';
-import SEO from '../components/SEO';
+import SEO, { buildFAQSchema, buildBreadcrumbSchema } from '../components/SEO';
 
 const FAQ_CATEGORIES = [
     { id: 'all', label: 'All Questions', icon: <Layers size={16} /> },
@@ -159,7 +159,18 @@ const FAQ = () => {
 
     return (
         <div className="page-container faq-page">
-            <SEO title="FAQ - Frequently Asked Questions" />
+            <SEO 
+                title="FAQ - Frequently Asked Questions" 
+                description="Complete FAQ for SwaplinQ non-custodial crypto exchange. Answers about security, privacy, swap rates, wallet compatibility, fees, and how the no-KYC exchange works."
+                keywords="SwaplinQ FAQ, crypto exchange questions, non-custodial FAQ, no KYC exchange help, anonymous swap guide, crypto swap support"
+                jsonLd={[
+                    buildFAQSchema(FAQ_ITEMS),
+                    buildBreadcrumbSchema([
+                        { name: 'SwaplinQ', url: 'https://swaplinq.com' },
+                        { name: 'FAQ', url: 'https://swaplinq.com/faq' }
+                    ])
+                ]}
+            />
 
             {/* ─── Hero ─── */}
             <header className="page-header faq-hero-header">

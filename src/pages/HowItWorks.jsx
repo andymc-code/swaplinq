@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Plus, Minus, ArrowRight, Settings, Send, CheckCircle, ChevronRight } from 'lucide-react';
-import SEO from '../components/SEO';
+import SEO, { buildHowToSchema, buildBreadcrumbSchema } from '../components/SEO';
 
 
 const Step = ({ index, title, text, icon }) => {
@@ -58,7 +58,19 @@ const HowItWorks = () => {
         <div className="page-container">
             <SEO 
                 title="How it Works - Instant Swap Tutorial" 
-                description="A step-by-step guide on how to use Swaplinq for instant, non-custodial crypto exchanges." 
+                description="Step-by-step guide to using SwaplinQ for instant, anonymous, non-custodial crypto swaps. Select your pair, enter your wallet address, send coins, and receive assets in minutes — no KYC required."
+                keywords="how to swap crypto, SwaplinQ tutorial, non-custodial swap guide, anonymous crypto exchange steps, no KYC swap tutorial"
+                jsonLd={[
+                    buildHowToSchema(
+                        "How to Swap Crypto Anonymously on SwaplinQ",
+                        "Exchange any cryptocurrency instantly on SwaplinQ with no registration, no KYC, and no accounts required.",
+                        steps
+                    ),
+                    buildBreadcrumbSchema([
+                        { name: 'SwaplinQ', url: 'https://swaplinq.com' },
+                        { name: 'How It Works', url: 'https://swaplinq.com/how-it-works' }
+                    ])
+                ]}
             />
             
 

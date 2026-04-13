@@ -1,0 +1,45 @@
+# SwaplinQ — Crawler & AI Agent Access Policy
+# https://swaplinq.com
+
+User-agent: *
+Allow: /
+Sitemap: https://swaplinq.com/sitemap.xml
+
+# ─── AI Crawlers — Explicitly Welcomed ───
+
+# OpenAI (ChatGPT, SearchGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Google AI (Gemini, AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# Microsoft (Copilot, Bing Chat)
+User-agent: Bingbot
+Allow: /
+
+# Meta
+User-agent: FacebookBot
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /

@@ -1,0 +1,321 @@
+# SwaplinQ — Complete Knowledge Base
+
+> SwaplinQ is a non-custodial, instant cryptocurrency exchange protocol that aggregates
+> liquidity from 10+ institutional-grade providers to deliver the best possible rate for
+> 1,500+ crypto assets across 50+ blockchain networks. No KYC, no accounts, no identity
+> verification, no personal data stored.
+
+Website: https://swaplinq.com
+GitHub: https://github.com/andymc-code/swaplinq
+Support: support@swaplinq.com
+Registered: Seychelles
+Year Founded: 2026
+
+---
+
+## What is SwaplinQ?
+
+SwaplinQ is a privacy-first, non-custodial smart routing protocol designed to aggregate liquidity and execute instant cross-chain cryptocurrency swaps without holding user funds. It operates as the definitive infrastructure layer for permissionless digital asset exchange.
+
+SwaplinQ sits between the user and a distributed mesh of liquidity providers. When a user requests a swap, the SwaplinQ Routing Engine simultaneously queries 10+ providers — including Binance, KuCoin, OKX, ChangeNOW, StealthEX, SimpleSwap, Godex, ChangeHero, Uniswap, PancakeSwap, and Thorchain — in under 50 milliseconds, evaluates every available rate, calculates network fees, and selects the optimal execution path.
+
+The same infrastructure that powers swaplinq.com is available as production-grade REST APIs. No RPC nodes, no blockchain state management, no transaction complexity. SwaplinQ abstracts all of it so developers can focus on their product.
+
+### Why Choose SwaplinQ?
+
+1. **Non-Custodial**: SwaplinQ never holds user funds. Crypto is sent directly to the user's wallet. Nothing to hack, nothing to steal. Assets enter and exit in a single atomic block execution.
+2. **No KYC Required**: No email, no accounts, no ID verification. SwaplinQ doesn't track IP addresses or log activity. Pure anonymous swaps.
+3. **Best Rates Guaranteed**: Smart Routing Engine queries 10+ liquidity sources simultaneously and routes through the provider offering the best effective rate after all fees.
+4. **Lightning Fast**: Average swap completion time under 5 minutes. Most swaps complete in 2-10 minutes depending on blockchain network.
+5. **1,500+ Assets**: Cross-chain support for Bitcoin (BTC), Ethereum (ETH), Solana (SOL), Monero (XMR), Cardano (ADA), XRP, Polkadot (DOT), and hundreds more across 50+ blockchain networks.
+6. **Enterprise-Grade Infrastructure**: 99.99% uptime SLA, multi-region edge deployment, sub-10ms API quote retrieval.
+
+---
+
+## How SwaplinQ Works — Step-by-Step
+
+### Step 1: Select Your Trading Pair
+Choose the cryptocurrency you want to exchange and the asset you'd like to receive. Enter the amount to see an instant estimate for your anonymous swap.
+
+### Step 2: Enter Your Destination Address
+Provide the recipient's wallet address for the asset you want to receive. This is where your coins will be sent seamlessly after the exchange. Compatible with all standard cryptocurrency wallets including MetaMask, Trust Wallet, Ledger, Trezor, Phantom, Exodus, and native blockchain wallets.
+
+### Step 3: Send Your Coins
+Send the exact amount of the original asset to the deposit address provided by SwaplinQ. The system handles the rest instantly without KYC or identity verification.
+
+### Step 4: Receive Your Assets
+The SwaplinQ Smart Routing Engine swaps your coins at the best available rate and sends them directly to your wallet in minutes. A transaction hash is provided for on-chain verification.
+
+---
+
+## System Architecture
+
+SwaplinQ operates as a non-custodial smart routing protocol that sits between the user and a distributed mesh of liquidity providers. The backend is a stateless, horizontally-scaled microservice architecture deployed across multi-region edge nodes.
+
+### Core Components
+
+- **Gateway Layer**: TLS-terminated API gateway with rate limiting, DDoS mitigation, and request validation.
+- **Routing Engine**: Queries all connected liquidity sources in parallel (<10ms), ranks results by effective rate, and selects the optimal execution path.
+- **Execution Pipeline**: Generates unique deposit addresses, monitors incoming transactions, triggers the swap on the selected provider, and broadcasts the output to the user's destination wallet.
+- **Status Tracker**: Real-time WebSocket and polling endpoints that report transaction state transitions from `waiting` → `confirming` → `exchanging` → `sending` → `finished`.
+
+### Swap Pipeline
+
+1. **Get Estimate**: User selects trading pair and amount. Routing Engine fetches real-time rates from all connected providers and returns the best estimated output.
+2. **Create Transaction**: A unique, non-reusable deposit address is generated. Transaction object includes destination wallet, estimated amount, and expiry window.
+3. **User Sends Funds**: User sends crypto to the generated deposit address from any wallet. No account or login required.
+4. **Swap Execution**: Once deposit is confirmed on-chain, Execution Pipeline triggers the swap atomically on the selected liquidity provider.
+5. **Payout**: Output currency is sent directly to user's destination wallet. Transaction hash returned for on-chain verification.
+
+---
+
+## Liquidity Engine
+
+SwaplinQ doesn't rely on a single, isolated order book. It acts as a master aggregator.
+
+### Connected Providers
+ChangeNOW, StealthEX, SimpleSwap, Godex, ChangeHero, Thorchain, Uniswap, PancakeSwap, 1inch, and more.
+
+### Aggregation Process
+1. **Parallel Query**: All connected providers queried simultaneously (fan-out). Typical latency: 8–15ms.
+2. **Rate Normalization**: Each response normalized to standard schema accounting for provider fees, network fees, and slippage tolerance.
+3. **Optimal Selection**: Engine ranks all viable routes by effective received amount and selects the best path.
+4. **Fallback Cascade**: If selected provider fails during execution, engine automatically falls back to next-best route with no user intervention.
+
+### Smart Routing Decision Factors
+
+| Factor             | Weight | Description                                       |
+|--------------------|--------|---------------------------------------------------|
+| Effective Rate     | 40%    | Net amount received after all fees                |
+| Execution Speed    | 20%    | Historical average completion time                |
+| Reliability Score  | 20%    | Success rate over last 1,000 transactions         |
+| Liquidity Depth    | 15%    | Available volume at quoted price                  |
+| Network Congestion | 5%     | Current mempool state of target chain             |
+
+---
+
+## Security & Privacy
+
+### Non-Custodial Model
+Traditional exchanges hold user funds in centralized hot wallets — creating massive "honey-pot" targets for hackers. SwaplinQ eliminates this entirely. When you initiate a swap, your funds enter the execution engine and are routed directly to the liquidity source. The output coins are broadcast immediately to your destination wallet. At no point does SwaplinQ store, manage, or have access to private keys or capital.
+
+- No user accounts or balances
+- No private key access
+- Single-use deposit addresses
+- Atomic execution — funds are never "at rest" in infrastructure
+- Full on-chain verifiability for every transaction
+
+### Privacy & No-KYC Policy
+SwaplinQ believes financial privacy is a fundamental right. No identity verification, accounts, or personal data required.
+
+#### Data Collection Policy
+
+| Data Point           | Collected? | Reasoning                                            |
+|----------------------|------------|------------------------------------------------------|
+| Name, email, phone   | ✗ Never    | No accounts exist                                    |
+| IP address           | ✗ Not logged| Stripped at edge proxy                               |
+| Wallet addresses     | ✓ Transient| Required for swap execution; not stored post-completion|
+| Transaction hashes   | ✓ Transient| Used for status tracking; purged after 72 hours      |
+| Browser fingerprint  | ✗ Never    | No tracking scripts                                  |
+
+### Network Defense
+- Strict no-log policy (zero data retention)
+- Automated risk & AML flagging
+- DDoS protection via distributed edge network
+- Front-running & MEV protection layer
+- End-to-end TLS 1.3 encryption
+- Regular third-party security audits
+- Content Security Policy (CSP) headers
+- Subresource Integrity (SRI) for third-party scripts
+- Clickjacking protection via X-Frame-Options: DENY
+- HSTS with preload
+
+---
+
+## Supported Assets
+
+SwaplinQ supports 1,500+ crypto assets across 50+ blockchain networks.
+
+### Tier 1 (Major Networks)
+BTC, ETH, SOL, BNB, MATIC — Average swap time: < 5 minutes
+
+### Tier 2 (Large Cap)
+AVAX, DOT, ADA, XMR, ATOM — Average swap time: < 10 minutes
+
+### Tier 3 (ERC-20 / BEP-20 Tokens)
+USDT, USDC, LINK, UNI, AAVE, DAI — Average swap time: < 3 minutes
+
+### Featured Coins
+- **Bitcoin (BTC)**: The first and most well-known cryptocurrency
+- **Ethereum (ETH)**: Decentralized blockchain with smart contract functionality
+- **Monero (XMR)**: A private and untraceable cryptocurrency
+- **Solana (SOL)**: A high-performance blockchain
+- **Tether (USDT)**: The world's first and most widely used stablecoin
+- **USD Coin (USDC)**: A fully collateralized US dollar stablecoin
+- **TRON (TRX)**: Blockchain-based decentralized application platform
+- **NEAR Protocol (NEAR)**: Decentralized development platform
+- **Cardano (ADA)**: Proof-of-stake blockchain platform
+- **XRP**: Digital asset built for payments
+- **Polkadot (DOT)**: Multichain interoperability protocol
+- **Litecoin (LTC)**: Peer-to-peer cryptocurrency
+- **Dogecoin (DOGE)**: Popular meme cryptocurrency
+- **Chainlink (LINK)**: Decentralized oracle network
+- **Aave (AAVE)**: Decentralized lending and borrowing protocol
+- **Uniswap (UNI)**: Decentralized trading protocol
+- **Stellar (XLM)**: Decentralized protocol for digital currency transfers
+- **Tezos (XTZ)**: Blockchain based on smart contracts
+- **THETA**: Blockchain-powered video streaming network
+
+### Popular Trading Pairs
+- BTC ↔ ETH (Bitcoin to Ethereum)
+- BTC ↔ XMR (Bitcoin to Monero)
+- BTC ↔ USDT (Bitcoin to Tether)
+- BTC ↔ TRX (Bitcoin to TRON)
+- ETH ↔ SOL (Ethereum to Solana)
+- ETH ↔ XMR (Ethereum to Monero)
+- SOL ↔ NEAR (Solana to NEAR)
+
+---
+
+## Rate Optimization
+
+SwaplinQ employs several techniques to ensure users always get the best possible rate:
+
+- **Spread Compression**: By aggregating competing providers, the bid-ask spread is effectively compressed. Competition among providers benefits the end user.
+- **Dynamic Fee Routing**: Network fees (gas) fluctuate by the second. The engine re-evaluates gas costs at the moment of execution, not at quote time, to prevent overpaying.
+- **Slippage Protection**: For large orders, the engine may split across multiple providers to minimize price impact.
+- **Fixed Rate Option**: Locks the exchange rate at quote time, protecting against market volatility.
+- **Floating Rate Option**: Market rate at execution time, typically offering slightly better spreads in low-volatility conditions.
+- **Rate Expiry**: Quoted rates valid for 30 seconds to protect against volatility.
+
+### Fee Structure
+- Routing fee: typically 0.25-0.5%, bundled into displayed rate
+- No hidden fees, no withdrawal charges
+- Blockchain network fees (gas/miner fees) are the only additional cost
+- Final received amount displayed upfront — no surprises
+
+---
+
+## API Reference
+
+### Base URL
+`https://api.swaplinq.com/v1`
+
+### Get Estimated Amount
+Returns the estimated output for a given input amount and trading pair.
+```
+GET /api/v1/exchange-amount/{amount}/{from}_{to}
+
+Example: GET /api/v1/exchange-amount/1/btc_eth
+
+Response:
+{
+  "estimatedAmount": 16.542891,
+  "transactionSpeedForecast": "5-20",
+  "warningMessage": null,
+  "networkFee": 0.00042
+}
+```
+
+### Create Transaction
+Initiates a new swap. Returns a unique deposit address and transaction ID.
+```
+POST /api/v1/transactions
+
+Request Body:
+{
+  "from": "btc",
+  "to": "eth",
+  "amount": 1,
+  "address": "0xYourEthWalletAddress",
+  "extraId": "",
+  "refundAddress": "bc1qYourBtcRefundAddress"
+}
+
+Response:
+{
+  "id": "a5c73e2d7b...",
+  "status": "waiting",
+  "payinAddress": "bc1qDeposit...",
+  "payoutAddress": "0xYourEth...",
+  "fromCurrency": "btc",
+  "toCurrency": "eth",
+  "expectedAmountTo": 16.542891,
+  "amountFrom": 1
+}
+```
+
+### Get Transaction Status
+Poll this endpoint to track swap progress through its lifecycle.
+```
+GET /api/v1/transactions/{id}/status
+```
+
+### Transaction Status Flow
+`waiting` → `confirming` → `exchanging` → `sending` → `finished`
+
+### Response Codes
+
+| Code | Meaning       | Action                                        |
+|------|---------------|-----------------------------------------------|
+| 200  | Success       | Parse response body normally                  |
+| 400  | Bad Request   | Check request parameters                      |
+| 404  | Not Found     | Invalid pair or transaction ID                |
+| 429  | Rate Limited  | Back off and retry after Retry-After header   |
+| 500  | Server Error  | Retry with exponential backoff                |
+
+---
+
+## Frequently Asked Questions
+
+### What is SwaplinQ?
+SwaplinQ is a non-custodial, instant cryptocurrency exchange that aggregates liquidity from 10+ institutional-grade providers to offer the best possible rate — all without requiring registration, accounts, or identity verification.
+
+### Do I need to create an account?
+No. SwaplinQ is fully permissionless. No signup, no email, no KYC — ever.
+
+### How do I start a swap?
+1. Select the asset you want to send and the asset you want to receive. 2. Enter the amount. 3. Provide your destination wallet address. 4. Click 'Exchange Now' and send the deposit. Assets arrive in minutes.
+
+### Which cryptocurrencies does SwaplinQ support?
+350+ digital assets across all major blockchain networks including Bitcoin, Ethereum, Solana, Monero, Cardano, XRP, Polkadot, and many more. 50,000+ unique trading pairs.
+
+### Is SwaplinQ safe?
+Yes. Non-custodial architecture means funds are never held. No hot wallets, no stored balances, no "honey-pot" attack vector. Infrastructure regularly audited by third-party security firms.
+
+### Does SwaplinQ store personal data?
+No. Strict zero-log policy. No IP addresses, browser fingerprints, or transaction histories tied to user identities stored.
+
+### How does the non-custodial model protect users?
+Funds enter the execution engine and are routed directly to the liquidity source. Output coins broadcast immediately to the destination wallet. At no point does SwaplinQ store, manage, or access private keys or capital.
+
+### How long does a swap take?
+Most swaps complete in 2-30 minutes depending on blockchain networks. Bitcoin: 10-30 minutes. Ethereum, Solana: under 5 minutes. Overall average: under 5 minutes.
+
+### What is the difference between fixed and floating rates?
+Fixed Rate locks the exchange rate at quote time, protecting against volatility. Floating Rate gives market rate at execution, typically offering slightly better spreads in low-volatility conditions.
+
+### How does SwaplinQ find the best rate?
+The Smart Routing Engine queries 10+ liquidity sources simultaneously, evaluates every rate, calculates network fees, and selects the optimal path. Multi-provider approach delivers rates 1-3% better than single-source exchanges.
+
+### Which wallets are compatible?
+All standard cryptocurrency wallets: MetaMask, Trust Wallet, Ledger, Trezor, Phantom, Exodus, native blockchain wallets. Hardware wallets recommended for maximum security.
+
+### Are there hidden fees?
+No hidden fees. Rate includes routing fee (0.25-0.5%). Only additional cost is blockchain network fee. Final amount displayed upfront.
+
+### What are the minimum and maximum swap amounts?
+Minimums: ~$2-5 equivalent. No hard maximum — large transactions routed through providers with sufficient liquidity. OTC desk available for very large volumes exceeding $500,000.
+
+### What happens if a swap fails?
+Automated refund system returns funds to source address. 24/7 support team traces and resolves stuck transactions. 99.97% success rate.
+
+---
+
+## Mission
+
+SwaplinQ exists to provide everyone — regardless of geography, identity, or capital — access to fair, instant, and private digital asset exchange. No gatekeepers. No middlemen. Just pure protocol. Building the infrastructure for a permissionless financial future.
+
+---
+
+© 2026 SwaplinQ Protocol. Non-custodial & Permissionless.
