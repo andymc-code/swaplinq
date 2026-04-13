@@ -6,9 +6,8 @@ import {
   Wallet, 
   Menu, 
   X,
-  Twitter,
+  Instagram,
   Github,
-  MessageSquare,
   ChevronDown
 } from 'lucide-react';
 import { SUPPORTED_COINS, POPULAR_PAIRS } from '../config/coins';
@@ -91,9 +90,8 @@ export const Footer = () => {
                     </Link>
                     <p>Advanced non-custodial exchange protocol with deep liquidity and lightning-fast execution.</p>
                     <div className="social-links">
-                        <a href="#"><Twitter size={20} /></a>
-                        <a href="#"><Github size={20} /></a>
-                        <a href="#"><MessageSquare size={20} /></a>
+                        <a href="https://github.com/andymc-code/swaplinq" target="_blank" rel="noopener noreferrer"><Github size={20} /></a>
+                        <a href="https://www.instagram.com/swaplinq/" target="_blank" rel="noopener noreferrer"><Instagram size={20} /></a>
                     </div>
                 </div>
 
