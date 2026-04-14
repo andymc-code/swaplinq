@@ -9,7 +9,8 @@ import HowItWorks from './pages/HowItWorks';
 import PairPage from './pages/PairPage';
 import CoinPage from './pages/CoinPage';
 import CoinsList from './pages/CoinsList';
-import { Contact, Blog, Reviews } from './pages/Sections';
+import { Contact, Blog } from './pages/Sections';
+import Reviews from './pages/Reviews';
 import Documents from './pages/Documents';
 
 function App() {

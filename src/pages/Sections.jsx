@@ -55,24 +55,3 @@ export const Blog = () => (
     </div>
 );
 
-export const Reviews = () => (
-    <div className="page-container">
-        <SEO title="Reviews - What Our Users Say" description="Read testimonials and reviews from the Swaplinq community." />
-        <header className="page-header">
-            <h1>User Reviews</h1>
-            <p>Join over 2.4 million satisfied traders who trust Swaplinq for their instant swaps.</p>
-        </header>
-        <section className="reviews-grid section-content">
-            <div className="review-card glass">
-                <div className="stars flex gap-1"><Star size={16} fill="#ffb300" color="#ffb300" /><Star size={16} fill="#ffb300" color="#ffb300" /><Star size={16} fill="#ffb300" color="#ffb300" /><Star size={16} fill="#ffb300" color="#ffb300" /><Star size={16} fill="#ffb300" color="#ffb300" /></div>
-                <p>"The fastest exchange I've ever used. The UI is absolutely stunning and super easy to navigate."</p>
-                <div className="author">- Alex G. (Pro Trader)</div>
-            </div>
-            <div className="review-card glass">
-                <div className="stars flex gap-1"><Star size={16} fill="#ffb300" color="#ffb300" /><Star size={16} fill="#ffb300" color="#ffb300" /><Star size={16} fill="#ffb300" color="#ffb300" /><Star size={16} fill="#ffb300" color="#ffb300" /><Star size={16} fill="#ffb300" color="#ffb300" /></div>
-                <p>"Privacy-first architecture is rare these days. Swaplinq delivers exactly what they promise."</p>
-                <div className="author">- Sarah M. (DeFi Analyst)</div>
-            </div>
-        </section>
-    </div>
-);

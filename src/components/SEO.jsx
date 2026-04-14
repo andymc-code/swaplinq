@@ -2,8 +2,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
-const SITE_URL = 'https://swaplinq.com';
-const SITE_NAME = 'SwaplinQ';
+export const SITE_URL = 'https://swaplinq.com';
+export const SITE_NAME = 'SwaplinQ';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 const DEFAULT_DESC = "SwaplinQ is a non-custodial instant cryptocurrency exchange aggregating 10+ liquidity providers for the best rates on 1,500+ assets. No KYC, no accounts, no data stored.";
 
