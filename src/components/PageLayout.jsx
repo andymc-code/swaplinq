@@ -40,7 +40,7 @@ export const Navbar = () => {
                     <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Exchange</Link></li>
                     <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link></li>
                     <li><Link to="/faq" className={location.pathname === '/faq' ? 'active' : ''}>FAQ</Link></li>
-                    <li><Link to="/documents" className={location.pathname === '/documents' ? 'active' : ''}>API Docs</Link></li>
+                    <li><a href="https://docs.swaplinq.com" className="active">API Docs</a></li>
                     <li className="dropdown">
                         <span className={`dropdown-trigger ${location.pathname.startsWith('/coins') ? 'active' : ''}`}>Coins <ChevronDown size={14} /></span>
                         <div className="dropdown-menu glass">
@@ -71,7 +71,7 @@ export const Navbar = () => {
                         <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Exchange</Link>
                         <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link>
                         <Link to="/faq" className={location.pathname === '/faq' ? 'active' : ''}>FAQ</Link>
-                        <Link to="/documents" className={location.pathname === '/documents' ? 'active' : ''}>API Docs</Link>
+                        <a href="https://docs.swaplinq.com" className="active">API Docs</a>
                         <Link to="/coins" className={location.pathname.startsWith('/coins') ? 'active' : ''}>Supported Coins</Link>
                     </motion.div>
                 )}
@@ -123,7 +123,7 @@ export const Footer = () => {
                     <div className="link-col">
                         <h5>Product</h5>
                         <Link to="/mobile-app">Mobile App</Link>
-                        <Link to="/documents">API Documentation</Link>
+                        <a href="https://docs.swaplinq.com">API Documentation</a>
                         <Link to="/buy-crypto">Buy Crypto</Link>
                         <Link to="/sell-crypto">Sell Crypto</Link>
                     </div>

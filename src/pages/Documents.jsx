@@ -90,6 +90,11 @@ const Documents = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const contentRef = useRef(null);
 
+    /* Redirect to new docs */
+    useEffect(() => {
+        window.location.replace("https://docs.swaplinq.com");
+    }, []);
+
     /* Intersection Observer for active section tracking */
     useEffect(() => {
         const observer = new IntersectionObserver(

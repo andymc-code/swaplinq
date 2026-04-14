@@ -258,10 +258,10 @@ const FAQ = () => {
                     <h3>Still have questions?</h3>
                     <p>Our 24/7 support team is ready to help. Check our documentation for detailed technical guides, or reach out directly.</p>
                     <div className="faq-cta-buttons">
-                        <Link to="/documents" className="premium-btn cta-btn faq-cta-btn">
+                        <a href="https://docs.swaplinq.com" className="premium-btn cta-btn faq-cta-btn">
                             <span>Read Documentation</span>
                             <ChevronRight size={18} />
-                        </Link>
+                        </a>
                         <a href="mailto:support@swaplinq.io" className="secondary-btn glass blur-btn">
                             Contact Support
                         </a>

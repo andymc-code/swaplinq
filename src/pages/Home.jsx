@@ -219,9 +219,9 @@ const Home = () => {
                                 <span>Start Swapping</span>
                                 <ChevronRight size={18} />
                             </a>
-                            <Link to="/documents" className="secondary-btn glass blur-btn">
+                            <a href="https://docs.swaplinq.com" className="secondary-btn glass blur-btn">
                                 <span>View Documentation</span>
-                            </Link>
+                            </a>
                         </div>
                         
                         <div className="hero-system-status">
@@ -327,9 +327,9 @@ const Home = () => {
                             <div className={`glow-icon ${feature.color}`}>{feature.icon}</div>
                             <h3>{feature.title}</h3>
                             <p>{feature.desc}</p>
-                            <Link to="/documents" className="premium-action">
+                            <a href="https://docs.swaplinq.com" className="premium-action">
                                 {feature.action} <ChevronRight size={14} />
-                            </Link>
+                            </a>
                         </motion.div>
                     ))}
                 </div>

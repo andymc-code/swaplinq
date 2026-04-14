@@ -263,10 +263,10 @@ const About = () => {
                     <h3>Building the infrastructure for a permissionless financial future.</h3>
                     <p>We exist to provide everyone — regardless of geography, identity, or capital — access to fair, instant, and private digital asset exchange. No gatekeepers. No middlemen. Just pure protocol.</p>
                     <div className="mission-actions">
-                        <Link to="/documents" className="premium-btn cta-btn mission-btn">
+                        <a href="https://docs.swaplinq.com" className="premium-btn cta-btn mission-btn">
                             <span>Read Full Documentation</span>
                             <ChevronRight size={20} />
-                        </Link>
+                        </a>
                         <Link to="/faq" className="secondary-btn glass blur-btn">
                             <span>Common Questions</span>
                         </Link>
