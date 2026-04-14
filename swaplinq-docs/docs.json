@@ -1,0 +1,98 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "SwaplinQ Documentation",
+  "colors": {
+    "primary": "#06b6d4",
+    "light": "#00d4aa",
+    "dark": "#0a0e1a"
+  },
+  "favicon": "/favicon.svg",
+  "logo": {
+    "light": "https://ik.imagekit.io/wnwu0xxx5/Swaplinq/swaplinq_logo-Picsart-BackgroundRemover.png",
+    "dark": "https://ik.imagekit.io/wnwu0xxx5/Swaplinq/swaplinq_logo-Picsart-BackgroundRemover.png"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Core Protocol",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "index",
+              "architecture/overview",
+              "architecture/non-custodial-model"
+            ]
+          },
+          {
+            "group": "Routing Engine",
+            "pages": [
+              "architecture/liquidity-aggregation",
+              "architecture/smart-routing",
+              "architecture/slippage-mev"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "api-reference/authentication",
+              "api-reference/errors"
+            ]
+          },
+          {
+            "group": "Endpoints",
+            "pages": [
+              "api-reference/endpoints/get-rates",
+              "api-reference/endpoints/create-swap",
+              "api-reference/endpoints/track-status"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Main Exchange",
+          "href": "https://swaplinq.com",
+          "icon": "arrow-up-right-from-square"
+        }
+      ]
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@swaplinq.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Launch App",
+      "href": "https://swaplinq.com"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "cursor"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/andymc-code/swaplinq",
+      "instagram": "https://www.instagram.com/swaplinq/"
+    }
+  }
+}

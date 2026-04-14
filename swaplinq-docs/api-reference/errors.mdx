@@ -1,0 +1,30 @@
+---
+title: "Errors"
+description: "Understanding standard HTTP error codes."
+---
+
+SwaplinQ uses conventional HTTP response codes to indicate the success or failure of an API request. 
+
+In general: Codes in the `2xx` range indicate success. Codes in the `4xx` range indicate an error that failed given the information provided (e.g., a required parameter was omitted, or an invalid coin pair was requested). Codes in the `5xx` range indicate an error with SwaplinQ's execution servers.
+
+### Error Schema
+All 4xx and 5xx errors return a standardized JSON body containing an error code and a human-readable message.
+
+```json
+{
+  "error": {
+    "code": "invalid_currency",
+    "message": "The pairing 'btc_invalidcoin' is not currently supported."
+  }
+}
+```
+
+### Common HTTP Codes
+
+| HTTP Status | Description | Action Required |
+| :--- | :--- | :--- |
+| **200 - OK** | Everything worked as expected. | Parse the valid JSON response. |
+| **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. | Check the response body `message` and reformat your payload. |
+| **404 - Not Found** | The requested resource doesn't exist. | Occurs if you request a rate for an invalid pair, or lookup a transaction ID that doesn't exist. |
+| **429 - Too Many Requests** | Too many requests hit the API too quickly. | Back off exponentially. Unauthenticated users are limited per minute by IP. |
+| **500, 502, 503, 504** | Execution Error | An internal routing failure occurred. Retry the request with exponential backoff. |

@@ -1,0 +1,28 @@
+---
+title: "Smart Routing"
+description: "How SwaplinQ dynamically selects the optimal execution path."
+---
+
+When interacting with the SwaplinQ API, you aren't just getting an arbitrary exchange rate. You are accessing a dynamic order-routing system built to protect your users from spread manipulation and isolated low-liquidity pools.
+
+### The Decision Matrix
+
+The core of our infrastructure is the Smart Routing algorithm. Every time a quote is requested, we rank all available execution paths using a strict weighted matrix:
+
+| Metric | Weight | Description |
+| :--- | :--- | :--- |
+| **Effective Rate (Net)** | `40%` | Ensures users get the absolute maximum amount of output tokens *after* all network gas and provider fees are deducted. |
+| **Execution Speed** | `20%` | Providers with slow API responses or congested withdrawal systems are demoted. |
+| **Reliability Score** | `20%` | We track the success/failure rate of the last 1,000 transactions for every provider. Failing providers are temporarily blacklisted. |
+| **Liquidity Depth** | `15%` | We preemptively check if a provider can fulfill large orders without slipping. |
+| **Network Congestion** | `5%` | We monitor EVM mempools. If ETH gas is spiking, cross-chain paths using L2s may be temporarily prioritized. |
+
+### Fallback Cascade Architecture
+
+Even the best institutional providers occasionally suffer API downtime or wallet exhaustion. 
+
+SwaplinQ shields you from this entirely via our **Fallback Cascade**. If the engine ranks Provider A as #1, but Provider A's execution API returns a `500` error or drops the connection mid-swap, SwaplinQ automatically and instantly re-routes the order to Provider B at the next best rate. 
+
+<Tip>
+Because of the Fallback Cascade, SwaplinQ guarantees a **99.97% transaction success rate**, even during massive market volatility.
+</Tip>

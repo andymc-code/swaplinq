@@ -1,0 +1,31 @@
+---
+title: Non-Custodial Architecture
+description: 'How SwaplinQ guarantees security by never holding user funds.'
+---
+
+Traditional centralized exchanges (CEX) hold user funds in centralized "hot wallets," creating massive honey-pot targets for hackers. 
+
+SwaplinQ eliminates this attack vector entirely. When you initiate a swap, your funds enter the execution pipeline and are routed **directly** to the liquidity source. The output coins are broadcast immediately to your destination wallet. 
+
+<Info>
+At no point does SwaplinQ store, manage, or have access to your private keys or capital.
+</Info>
+
+### Transaction Lifecycle
+
+The lifecycle of a single atomic swap on SwaplinQ follows a strict, state-machine validated pipeline:
+
+1. **Quote Generation**: The `Routing Engine` queries 10+ providers in parallel and locks in the best rate.
+2. **Deposit Address Generation**: The `Execution Pipeline` creates a unique, single-use, non-reusable deposit wallet.
+3. **User Deposit**: You send funds directly from your self-custody wallet (MetaMask, Ledger, etc.) to the generated address.
+4. **Atomic Execution**: Once your deposit confirms on-chain, the swap triggers on the selected liquidity provider.
+5. **Output Broadcast**: The resulting crypto is immediately dispatched to your destination wallet.
+
+### Zero-Log Policy & Privacy
+
+Since SwaplinQ does not store value, it is not required to enforce KYC (Know Your Customer) compliance. We operate as a pure routing utility protocol.
+
+* **No Accounts**: You never create an account to use SwaplinQ.
+* **No Identifying Data**: We do not collect names, emails, or phone numbers.
+* **No IP Tracking**: We strip IP addresses and browser fingerprints at the edge proxy level.
+* **Ephemeral Data**: Transaction hashes and deposit wallets are transiently used for tracking your swap status and purged entirely after 72 hours.

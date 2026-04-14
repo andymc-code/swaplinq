@@ -1,0 +1,30 @@
+---
+title: "Slippage & MEV Protection"
+description: "How the protocol prevents sandwich attacks and spread bleed."
+---
+
+When executing large orders or trading illiquid pairs, users typically fall victim to two primary on-chain threats: **Slippage** and **MEV (Maximal Extractable Value) Attacks**.
+
+### Slippage Mitigation
+
+Slippage occurs when the execution price differs from the quoted price due to a lack of liquidity. 
+
+SwaplinQ mitigates slippage through our **Liquidity Aggregation** model. By pooling order books from centralized providers (like Binance and KuCoin) and decentralized providers (like Thorchain and Uniswap), the effective bid-ask spread is dramatically compressed. 
+
+If a user requests a $500,000 exchange that would typically cause a 4% slip on a standard AMM, the SwaplinQ engine can route it through highly-liquid institutional OTC desks or split the order dynamically to ensure a near-zero slip.
+
+### MEV and Front-running Defense
+
+Because SwaplinQ executes trades across private institutional endpoints and secure API gateways rather than broadcasting raw intent payloads to public EVM mempools, **you are immune to sandwich attacks**.
+
+<Warning>
+Public AMMs on Ethereum and Solana broadcast your transaction intent to searchers before execution. Malicious bots "sandwich" your trade by buying right before you and selling right after, artificially inflating your price.
+</Warning>
+
+SwaplinQ's architecture bypasses this entirely:
+1. You are given a fixed quote.
+2. You deposit to a unique SwaplinQ address.
+3. The swap is executed off-chain or via protected private RPC relays by the provider.
+4. You receive your exact quoted funds.
+
+No public mempool exposure. No MEV extraction.

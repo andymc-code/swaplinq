@@ -1,0 +1,54 @@
+---
+title: "Create Swap Transaction"
+api: "POST https://api.swaplinq.com/v1/transactions"
+description: "Initiates a new swap and generates a unique deposit address."
+---
+
+Once you have received an estimated rate via the `exchange-amount` endpoint, you call this endpoint to officially lock the transaction and generate a pay-in address.
+
+### Request Body
+
+<ParamField body="from" type="string" required>
+  The ticker of the currency you are sending. E.g., `btc`.
+</ParamField>
+
+<ParamField body="to" type="string" required>
+  The ticker of the currency you want to receive. E.g., `eth`.
+</ParamField>
+
+<ParamField body="amount" type="number" required>
+  The exact amount of the `from` currency you plan to deposit.
+</ParamField>
+
+<ParamField body="address" type="string" required>
+  The destination wallet address where SwaplinQ will send the output funds.
+</ParamField>
+
+<ParamField body="refundAddress" type="string" required>
+  The wallet address where funds should be returned if the transaction fails, times out, or encounters massive slippage. Essential for user security.
+</ParamField>
+
+<ParamField body="extraId" type="string">
+  Optional Memo, Destination Tag, or Payment ID for currencies that require it (like XRP or XLM).
+</ParamField>
+
+### Response
+
+The response provides the unique `payinAddress` where the user must send their funds. It also provides the `id` required to track the transaction.
+
+<ResponseExample>
+
+```json Example Response
+{
+  "id": "a5c73e2d7b89f0a1",
+  "status": "waiting",
+  "payinAddress": "bc1qDepositAddressPlaceholderxyz987",
+  "payoutAddress": "0xYourEthDestAddress12345",
+  "fromCurrency": "btc",
+  "toCurrency": "eth",
+  "expectedAmountTo": 16.542891,
+  "amountFrom": 1
+}
+```
+
+</ResponseExample>

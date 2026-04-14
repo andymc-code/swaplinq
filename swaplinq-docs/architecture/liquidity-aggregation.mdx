@@ -1,0 +1,47 @@
+---
+title: Liquidity Aggregation
+description: 'How SwaplinQ solves MEV and slippage by querying 10+ institutional providers simultaneously.'
+---
+
+
+
+## The Problem with Traditional AMMs
+
+Single-source Automated Market Makers (AMMs) suffer from inherent architectural flaws for high-volume traders:
+1. **High Slippage**: Large orders significantly move the price curve on a single pool.
+2. **MEV Attacks**: Predictable on-chain routing allows searchers to front-run and sandwich user transactions.
+3. **Fragmented Yield**: The best rate for BTC/ETH might be on Binance's backend today, but Uniswap tomorrow.
+
+## The SwaplinQ Solution
+
+SwaplinQ doesn't rely on a single isolated order book. It acts as a **master aggregator layer**.
+
+When a user or API client requests a quote via the `/exchange-amount` endpoint, the SwaplinQ Smart Routing Engine executes a parallel fan-out query to 10+ institutional-grade providers simultaneously. 
+
+### Connected Providers
+Our execution pipeline is currently wired directly into the order books of:
+* Binance
+* KuCoin
+* OKX
+* ChangeNOW
+* StealthEX
+* SimpleSwap
+* Uniswap
+* PancakeSwap
+* Thorchain
+
+### The 50ms Matrix
+
+The engine normalizes the responses and ranks all viable routes in under 50 milliseconds using a strict weighted matrix:
+
+| Factor | Weight | Description |
+| :--- | :--- | :--- |
+| **Effective Rate** | 40% | Net amount received after all routing and network fees. |
+| **Execution Speed** | 20% | Historical average completion time of the specific provider. |
+| **Reliability Score** | 20% | Success rate over the last 1,000 transactions on that route. |
+| **Liquidity Depth** | 15% | Available volume at the quoted price without incurring slippage. |
+| **Network Congestion** | 5% | Current mempool state of the target chain. |
+
+<Note>
+**Fallback Cascade:** If the primary selected provider fails during execution, the engine automatically falls back to the next-best route seamlessly. The user (or your API implementation) never experiences a failed transaction.
+</Note>

@@ -1,0 +1,26 @@
+---
+title: "Architecture Overview"
+description: "High-level design of the SwaplinQ Non-Custodial Protocol"
+---
+
+SwaplinQ is built as a stateless, horizontally scaled microservice architecture deployed across multi-region edge nodes. It is entirely non-custodial, meaning it does not hold capital, maintain private keys, or manage on-chain custody contracts.
+
+<Card title="The SwaplinQ Difference" icon="bolt">
+  Unlike traditional decentralized exchanges that run off a single liquidity pool or CEXs that require custodial accounts, SwaplinQ sits directly above the liquidity layer, routing orders dynamically across the entire crypto ecosystem.
+</Card>
+
+## Core Microservices
+
+The architecture is split into four highly decoupled layers to ensure strict security partitioning and sub-10ms response times.
+
+1. **Gateway Layer**
+   The TLS 1.3 terminated API gateway handles all incoming client connections. It is responsible for geo-routing, rigorous rate limiting (via Redis), DDoS mitigation (via Cloudflare edge), and strict request parameter validation. No unvalidated payloads pass this layer.
+
+2. **Smart Routing Engine**
+   A proprietary high-frequency pricing engine. When a quote is requested, it executes a parallel fan-out query to 10+ connected providers, normalizing their arbitrary schemas into a standardized internal object, and ranks them by effective rate in under 15ms.
+
+3. **Execution Pipeline**
+   The transactional core. Once a user confirms a quote, the pipeline generates a single-use deposit address. It asynchronously monitors the mempool for incoming funds. Upon confirmation, it atomically triggers the swap at the chosen liquidity provider and dictates the payout to the user's destination wallet.
+
+4. **Status Tracker State-Machine**
+   A resilient, polling-based tracking microservice. Because blockchains operate asynchronously and providers can stall, the Status Tracker governs the transaction through a rigid state-flow: `waiting` → `confirming` → `exchanging` → `sending` → `finished`.

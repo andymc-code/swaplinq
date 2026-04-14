@@ -1,0 +1,44 @@
+---
+title: "Track Status"
+api: "GET https://api.swaplinq.com/v1/transactions/{id}/status"
+description: "Poll this endpoint to monitor the lifecycle of an active swap."
+---
+
+Because blockchains operate asynchronously, exchanging assets takes time (pending network confirmations and block-times). You use this endpoint to fetch the current state of a transaction created via `/transactions`.
+
+<ParamField path="id" type="string" required>
+  The unique transaction `id` returned when creating the swap.
+</ParamField>
+
+### Transaction Status Lifecycle
+
+A standard, successful transaction will flow sequentially through these states:
+
+1. `waiting` — The deposit address has been generated. The system is waiting for the user to send funds.
+2. `confirming` — The user has sent the funds. The system is waiting for the required amount of blockchain confirmations (e.g., 2 confirmations for BTC).
+3. `exchanging` — Funds have been confirmed. The execution pipeline is actively routing and swapping the assets via the selected provider.
+4. `sending` — The swap is complete. The system is currently broadcasting the payout transaction to the destination block explorer.
+5. `finished` — The payout transaction has been successfully mined. The swap is fully complete.
+
+<Accordion title="Failure States">
+If things go wrong, the status will move into a failure block:
+* `failed` — The swap could not execute (e.g. massive market crash invalidated rate). Funds will be sent back to `refundAddress`.
+* `refunded` — The auto-refund system successfully returned user funds.
+* `overdue` — The user did not send the funds within the 24-hour validity window.
+</Accordion>
+
+### Response
+
+<ResponseExample>
+
+```json Example Response
+{
+  "id": "a5c73e2d7b89f0a1",
+  "status": "exchanging",
+  "payinHash": "fc9a32...b132",
+  "payoutHash": null,
+  "updatedAt": "2026-04-13T12:00:00Z"
+}
+```
+
+</ResponseExample>

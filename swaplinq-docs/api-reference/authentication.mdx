@@ -1,0 +1,32 @@
+---
+title: "Authentication"
+description: "Securing your API requests."
+---
+
+SwaplinQ offers a fully permissionless public API suite for creating and tracking exchanges. For higher rate limits, partner integrations, and revenue sharing, API Keys are utilized.
+
+<Note>
+By default, the endpoints documented here do not require an `Authorization` header for standard usage limits.
+</Note>
+
+### Public Access limits
+
+Public, unauthenticated requests are strictly rate-limited to protect the infrastructure:
+* **Rate Quotes (`/exchange-amount`)**: 30 requests per minute per IP.
+* **Transaction Creation (`/transactions`)**: 10 requests per minute per IP.
+* **Status Tracking**: 60 requests per minute per IP.
+
+### Authenticated Access (Partners)
+
+If you are building an integration (wallet, aggregator, or dApp) that generates significant volume, you must pass your provided Partner API Key via the header.
+
+```http
+Authorization: Bearer sq_live_1234567890abcdef
+```
+
+Authenticated partners receive:
+1. Effectively unlimited rate limits.
+2. Access to fixed-rate lock intervals (up to 20 minutes).
+3. Partner revenue share splitting on routing fees.
+
+Please contact **support@swaplinq.com** to request a Partner API Key.

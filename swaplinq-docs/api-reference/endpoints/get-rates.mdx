@@ -1,0 +1,42 @@
+---
+title: "Get Estimated Amount"
+api: "GET https://api.swaplinq.com/v1/exchange-amount/{amount}/{pair}"
+description: "Returns the estimated output output for a given input amount and trading pair."
+---
+
+Fetches a real-time quote for an exchange pair. The Smart Routing Engine simultaneously queries all connected providers (Binance, ChangeNOW, Uniswap, etc.) and returns the absolute best effective rate.
+
+<ParamField path="amount" type="number" required>
+  The amount of the input cryptocurrency you want to exchange.
+</ParamField>
+
+<ParamField path="pair" type="string" required>
+  The trading pair formatted as `fromCoin_toCoin`. For example: `btc_eth` or `eth_sol`.
+</ParamField>
+
+### Response
+
+<ResponseField name="estimatedAmount" type="number">
+  The final amount the user will receive after all routing fees.
+</ResponseField>
+
+<ResponseField name="transactionSpeedForecast" type="string">
+  Estimated completion time string format (e.g., "5-20" minutes).
+</ResponseField>
+
+<ResponseField name="networkFee" type="number">
+  The on-chain miner/gas fee required to broadcast the transaction.
+</ResponseField>
+
+<ResponseExample>
+
+```json Example Response
+{
+  "estimatedAmount": 16.542891,
+  "transactionSpeedForecast": "5-20",
+  "warningMessage": null,
+  "networkFee": 0.00042
+}
+```
+
+</ResponseExample>
