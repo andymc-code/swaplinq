@@ -294,6 +294,33 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* ─── SPLIT SECTION 1 ─── */}
+            <section className="split-section">
+                <div className="split-content">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                        <span className="badge-pill">DEEP LIQUIDITY</span>
+                        <h2>Uncompromising <span>Execution.</span></h2>
+                        <p>Our smart routing algorithm sources liquidity from absolute premium providers. By aggregating data across multiple institutional-grade DEXs and CEXs, Swaplinq ensures you always receive the optimal exchange rate without slippage.</p>
+                        <a href="https://docs.swaplinq.com" className="primary-btn" style={{display: 'inline-flex', padding: '12px 24px', fontSize: '15px'}}>
+                            <span>Explore the Protocol</span>
+                            <ChevronRight size={18} />
+                        </a>
+                    </motion.div>
+                </div>
+                <div className="split-image-container">
+                    <div className="split-glow-bg"></div>
+                    <motion.img 
+                        src="/images/render_central_v1.png" 
+                        alt="Uncompromising Execution" 
+                        className="split-image" 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    />
+                </div>
+            </section>
+
             {/* ─── FEATURES ─── */}
             <section className="features-section" id="features">
                 <div className="section-head">
@@ -401,6 +428,40 @@ const Home = () => {
                             </div>
                         </motion.div>
                     ))}
+                </div>
+            </section>
+
+            {/* ─── SPLIT SECTION 2 ─── */}
+            <section className="split-section reverse">
+                <div className="split-content">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                        <span className="badge-pill">SELF CUSTODY</span>
+                        <h2>Your Keys, <span>Your Crypto.</span></h2>
+                        <p>We built Swaplinq on the foundational ethos of Web3. We never hold your assets. Our non-custodial architecture means transactions flow directly wallet-to-wallet. You maintain absolute control over your wealth at all times.</p>
+                        <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-primary)' }}>
+                                <CheckCircle2 size={18} color="var(--accent-emerald)" /> Zero counterparty risk
+                            </li>
+                            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-primary)' }}>
+                                <CheckCircle2 size={18} color="var(--accent-emerald)" /> No frozen accounts
+                            </li>
+                            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-primary)' }}>
+                                <CheckCircle2 size={18} color="var(--accent-emerald)" /> Immutable settlement
+                            </li>
+                        </ul>
+                    </motion.div>
+                </div>
+                <div className="split-image-container">
+                    <div className="split-glow-bg" style={{background: 'radial-gradient(circle, rgba(41, 121, 255, 0.1) 0%, transparent 60%)'}}></div>
+                    <motion.img 
+                        src="/images/social_self_custody_mechanism_v1.png" 
+                        alt="Self Custody Mechanism" 
+                        className="split-image" 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    />
                 </div>
             </section>
 
