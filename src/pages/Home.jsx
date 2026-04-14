@@ -29,6 +29,17 @@ import { PROVIDERS, DEFAULT_PROVIDER } from '../config/providers';
 
 import { SiBinance, SiKucoin, SiCoinbase, SiChainlink, SiSolana, SiEthereum } from 'react-icons/si';
 
+/* ── NEW: Visual enhancement imports ── */
+import HeroGlobe from '../components/HeroGlobe';
+import BackgroundGrid from '../components/BackgroundGrid';
+import { STEP_ILLUSTRATIONS } from '../components/StepIllustrations';
+import { 
+  STAT_ICONS, 
+  GUARANTEE_ICONS,
+  CTAShieldIllustration,
+  CTANetworkIllustration 
+} from '../components/CustomIcons';
+
 const LIQUIDITY_PARTNERS = [
     { name: 'Binance', Icon: SiBinance, color: '#F3BA2F', url: 'https://www.binance.com' },
     { name: 'KuCoin', Icon: SiKucoin, color: '#24a159', url: 'https://www.kucoin.com' },
@@ -38,7 +49,7 @@ const LIQUIDITY_PARTNERS = [
     { name: 'Ethereum', Icon: SiEthereum, color: '#627EEA', url: 'https://ethereum.org' }
 ];
 
-const AnimatedCounter = ({ value, decimals = 0, prefix = "", suffix = "" }) => {
+const AnimatedCounter = ({ value, decimals = 0, prefix = "", suffix = "", format = false }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
     const count = useMotionValue(0);
@@ -50,11 +61,14 @@ const AnimatedCounter = ({ value, decimals = 0, prefix = "", suffix = "" }) => {
             duration: 4,
             ease: [0.25, 0.1, 0.25, 1],
             onUpdate: (latest) => {
-                setDisplayValue(prefix + latest.toFixed(decimals) + suffix);
+                const num = format 
+                    ? Math.round(latest).toLocaleString('en-US')
+                    : latest.toFixed(decimals);
+                setDisplayValue(prefix + num + suffix);
             }
         });
         return () => controls.stop();
-    }, [value, decimals, prefix, suffix, count, isInView]);
+    }, [value, decimals, prefix, suffix, count, isInView, format]);
 
     return <span ref={ref}>{displayValue}</span>;
 };
@@ -183,6 +197,22 @@ const Home = () => {
         { title: "Receive Your Assets", desc: "Our smart routing system swaps your coins at the best rate and sends them directly to your wallet in minutes." }
     ];
 
+    /* Stat definitions with custom icon lookups */
+    const statData = [
+        { end: 350, suffix: "+", label: "Assets Supported" },
+        { end: 2.4, decimals: 1, suffix: "M", label: "Completed Swaps" },
+        { end: 5, prefix: "< ", suffix: "s", label: "Avg. Duration" },
+        { end: 4.9, decimals: 1, suffix: "/5", label: "User Rating" }
+    ];
+
+    /* Guarantee items with custom icon lookups */
+    const guaranteeItems = [
+        { title: "Non-Custodial", desc: "We never hold your funds. Crypto is sent directly to your wallet instantly. Nothing to hack, nothing to steal.", color: "emerald" },
+        { title: "Total Anonymity", desc: "No email, no accounts, no ID verification. We don't track your IP or log activity. Pure anonymous swaps.", color: "cyan" },
+        { title: "Fixed Rates", desc: "Complete transparency in execution. Lock in your rate to ensure you get exactly what you expect, protected against volatility.", color: "blue" },
+        { title: "24/7 Support", desc: "Real, experienced human support available around the clock to assist you with any network routing issues.", color: "purple" }
+    ];
+
     return (
         <>
             <SEO 
@@ -198,6 +228,9 @@ const Home = () => {
                     )
                 ]}
             />
+
+            {/* ── BACKGROUND GRID + PARTICLES ── */}
+            <BackgroundGrid />
 
             {/* ─── HERO ─── */}
             <section className="hero">
@@ -227,6 +260,16 @@ const Home = () => {
                         <div className="hero-system-status">
                             <SystemStatusBadge />
                         </div>
+                    </motion.div>
+
+                    {/* ── HERO GLOBE (fills dead space on the left below content) ── */}
+                    <motion.div 
+                        className="hero-globe-position"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.5, duration: 1, ease: 'easeOut' }}
+                    >
+                        <HeroGlobe />
                     </motion.div>
                 </div>
                 
@@ -260,65 +303,58 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* ─── STATS BAR (moved up for impact) ─── */}
+            {/* ─── STATS BAR — Custom Icons + Count-up ─── */}
             <section className="stats-bar">
                 <div className="stats-grid">
-                    {[
-                        { end: 350, suffix: "+", label: "Assets Supported", icon: <Layers size={20} /> },
-                        { end: 2.4, decimals: 1, suffix: "M", label: "Completed Swaps", icon: <Activity size={20} /> },
-                        { end: 5, prefix: "< ", suffix: "s", label: "Avg. Duration", icon: <Zap size={20} /> },
-                        { end: 4.9, decimals: 1, suffix: "/5", label: "User Rating", icon: <Sparkles size={20} /> }
-                    ].map((stat, i) => (
-                        <motion.div 
-                            key={i}
-                            className="stat-item"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                        >
-                            <div className="stat-icon-ring">
-                                {stat.icon}
-                            </div>
-                            <span className="stat-value">
-                                <AnimatedCounter 
-                                    value={stat.end} 
-                                    decimals={stat.decimals || 0}
-                                    suffix={stat.suffix || ""}
-                                    prefix={stat.prefix || ""}
-                                />
-                            </span>
-                            <span className="stat-label">{stat.label}</span>
-                        </motion.div>
-                    ))}
+                    {statData.map((stat, i) => {
+                        const StatIcon = STAT_ICONS[stat.label];
+                        return (
+                            <motion.div 
+                                key={i}
+                                className="stat-item"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                            >
+                                <div className="stat-custom-icon-wrap">
+                                    {StatIcon ? <StatIcon /> : null}
+                                </div>
+                                <span className="stat-value">
+                                    <AnimatedCounter 
+                                        value={stat.end} 
+                                        decimals={stat.decimals || 0}
+                                        suffix={stat.suffix || ""}
+                                        prefix={stat.prefix || ""}
+                                    />
+                                </span>
+                                <span className="stat-label">{stat.label}</span>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </section>
 
-            {/* ─── SPLIT SECTION 1 ─── */}
-            <section className="split-section">
-                <div className="split-content">
-                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                        <span className="badge-pill">DEEP LIQUIDITY</span>
-                        <h2>Uncompromising <span>Execution.</span></h2>
-                        <p>Our smart routing algorithm sources liquidity from absolute premium providers. By aggregating data across multiple institutional-grade DEXs and CEXs, Swaplinq ensures you always receive the optimal exchange rate without slippage.</p>
-                        <a href="https://docs.swaplinq.com" className="primary-btn" style={{display: 'inline-flex', padding: '12px 24px', fontSize: '15px'}}>
-                            <span>Explore the Protocol</span>
-                            <ChevronRight size={18} />
-                        </a>
-                    </motion.div>
-                </div>
-                <div className="split-image-container">
-                    <div className="split-glow-bg"></div>
-                    <motion.img 
-                        src="/images/render_central_v1.png" 
-                        alt="Uncompromising Execution" 
-                        className="split-image" 
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    />
-                </div>
+            {/* ─── LIQUIDITY SHOWCASE ─── */}
+            <section className="liquidity-showcase">
+                <motion.div
+                    className="liquidity-inner"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, ease: 'easeOut' }}
+                >
+                    <span className="liquidity-label">TOTAL ACCESSIBLE LIQUIDITY</span>
+                    <div className="liquidity-value">
+                        <span className="liquidity-dollar">$</span>
+                        <AnimatedCounter value={67000000} decimals={0} suffix="" prefix="" format={true} />
+                    </div>
+                    <p className="liquidity-sub">
+                        In aggregated assets across our partner exchange network — ensuring deep order books, 
+                        minimal slippage, and best-in-class execution on every swap.
+                    </p>
+                    <div className="liquidity-pulse-ring" />
+                </motion.div>
             </section>
 
             {/* ─── FEATURES ─── */}
@@ -390,7 +426,7 @@ const Home = () => {
                 </motion.div>
             </section>
 
-            {/* ─── HOW IT WORKS ─── */}
+            {/* ─── HOW IT WORKS — with step illustrations ─── */}
             <section className="how-it-works-section" id="how-it-works">
                 <div className="section-head">
                     <span className="badge-pill">NON KYC EXCHANGE</span>
@@ -412,60 +448,32 @@ const Home = () => {
                         { num: "02", title: "Enter Your Address", desc: "Provide the recipient's wallet address for the asset you want to receive. This is where your coins will be sent seamlessly after the exchange.", icon: <Wallet size={18} /> },
                         { num: "03", title: "Send Your Coins", desc: "Send the exact amount of the original asset to the deposit address provided by Swaplinq. We handle the rest instantly without KYC.", icon: <ArrowRight size={18} /> },
                         { num: "04", title: "Receive Your Assets", desc: "Our smart routing system swaps your coins at the best rate and sends them directly to your wallet in minutes. True no-account crypto trading.", icon: <CheckCircle2 size={18} /> }
-                    ].map((step, i) => (
-                        <motion.div 
-                            key={i}
-                            className="timeline-step glass"
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.15, duration: 0.5 }}
-                        >
-                            <div className="step-number-huge">{step.num}</div>
-                            <div className="step-content">
-                                <h3>{step.title}</h3>
-                                <p>{step.desc}</p>
-                            </div>
-                        </motion.div>
-                    ))}
+                    ].map((step, i) => {
+                        const IllustrationComponent = STEP_ILLUSTRATIONS[i];
+                        return (
+                            <motion.div 
+                                key={i}
+                                className="timeline-step glass"
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.15, duration: 0.5 }}
+                            >
+                                <div className="step-illustration-wrap">
+                                    <IllustrationComponent />
+                                </div>
+                                <div className="step-number-huge">{step.num}</div>
+                                <div className="step-content">
+                                    <h3>{step.title}</h3>
+                                    <p>{step.desc}</p>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </section>
 
-            {/* ─── SPLIT SECTION 2 ─── */}
-            <section className="split-section reverse">
-                <div className="split-content">
-                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                        <span className="badge-pill">SELF CUSTODY</span>
-                        <h2>Your Keys, <span>Your Crypto.</span></h2>
-                        <p>We built Swaplinq on the foundational ethos of Web3. We never hold your assets. Our non-custodial architecture means transactions flow directly wallet-to-wallet. You maintain absolute control over your wealth at all times.</p>
-                        <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-primary)' }}>
-                                <CheckCircle2 size={18} color="var(--accent-emerald)" /> Zero counterparty risk
-                            </li>
-                            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-primary)' }}>
-                                <CheckCircle2 size={18} color="var(--accent-emerald)" /> No frozen accounts
-                            </li>
-                            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-primary)' }}>
-                                <CheckCircle2 size={18} color="var(--accent-emerald)" /> Immutable settlement
-                            </li>
-                        </ul>
-                    </motion.div>
-                </div>
-                <div className="split-image-container">
-                    <div className="split-glow-bg" style={{background: 'radial-gradient(circle, rgba(41, 121, 255, 0.1) 0%, transparent 60%)'}}></div>
-                    <motion.img 
-                        src="/images/social_self_custody_mechanism_v1.png" 
-                        alt="Self Custody Mechanism" 
-                        className="split-image" 
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    />
-                </div>
-            </section>
-
-            {/* ─── TRUST & GUARANTEE ─── */}
+            {/* ─── TRUST & GUARANTEE — with bespoke SVG icons ─── */}
             <section className="trust-section" id="trust">
                 <div className="section-head">
                     <span className="badge-pill">OUR GUARANTEE</span>
@@ -482,33 +490,39 @@ const Home = () => {
                 </div>
 
                 <div className="guarantee-grid">
-                    {[
-                        { icon: <ShieldCheck size={24} />, title: "Non-Custodial", desc: "We never hold your funds. Crypto is sent directly to your wallet instantly. Nothing to hack, nothing to steal.", color: "emerald" },
-                        { icon: <EyeOff size={24} />, title: "Total Anonymity", desc: "No email, no accounts, no ID verification. We don't track your IP or log activity. Pure anonymous swaps.", color: "cyan" },
-                        { icon: <Lock size={24} />, title: "Fixed Rates", desc: "Complete transparency in execution. Lock in your rate to ensure you get exactly what you expect, protected against volatility.", color: "blue" },
-                        { icon: <Headset size={24} />, title: "24/7 Support", desc: "Real, experienced human support available around the clock to assist you with any network routing issues.", color: "purple" }
-                    ].map((item, i) => (
-                        <motion.div 
-                            key={i}
-                            className="guarantee-card glass"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1, duration: 0.5 }}
-                        >
-                            <div className={`glow-icon ${item.color}`}>{item.icon}</div>
-                            <h3>{item.title}</h3>
-                            <p>{item.desc}</p>
-                        </motion.div>
-                    ))}
+                    {guaranteeItems.map((item, i) => {
+                        const CustomIcon = GUARANTEE_ICONS[item.title];
+                        return (
+                            <motion.div 
+                                key={i}
+                                className="guarantee-card glass"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1, duration: 0.5 }}
+                            >
+                                <div className={`guarantee-icon-wrap ${item.color}`}>
+                                    {CustomIcon ? <CustomIcon /> : null}
+                                </div>
+                                <h3>{item.title}</h3>
+                                <p>{item.desc}</p>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </section>
 
             <HomeFAQSection />
 
-            {/* ─── CTA ─── */}
+            {/* ─── CTA — with flanking illustrations ─── */}
             <section className="cta-section">
                 <div className="cta-bg-glow"></div>
+                
+                {/* Left: Shield illustration */}
+                <div className="cta-flank cta-flank--left">
+                    <CTAShieldIllustration />
+                </div>
+
                 <div className="cta-inner" style={{ position: 'relative', zIndex: 2 }}>
                     <h3>Reclaim your financial privacy today.</h3>
                     <p>Join the thousands of users seamlessly swapping crypto with zero KYC, absolute security, and total anonymity.</p>
@@ -519,6 +533,11 @@ const Home = () => {
                         <span>Start Swapping Anonymously</span>
                         <ChevronRight size={22} className="cta-icon" />
                     </a>
+                </div>
+
+                {/* Right: Network illustration */}
+                <div className="cta-flank cta-flank--right">
+                    <CTANetworkIllustration />
                 </div>
             </section>
         </>
