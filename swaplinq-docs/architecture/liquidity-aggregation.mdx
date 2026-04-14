@@ -18,7 +18,13 @@ SwaplinQ doesn't rely on a single isolated order book. It acts as a **master agg
 
 When a user or API client requests a quote via the `/exchange-amount` endpoint, the SwaplinQ Smart Routing Engine executes a parallel fan-out query to 10+ institutional-grade providers simultaneously. 
 
+<Frame>
+  <img src="/images/deep-liquidity.jpeg" alt="Deep Liquidity Engine Visualization" />
+</Frame>
+
 ### Connected Providers
+
+<Accordion title="View Integrated Execution Endpoints" icon="server">
 Our execution pipeline is currently wired directly into the order books of:
 * Binance
 * KuCoin
@@ -29,6 +35,7 @@ Our execution pipeline is currently wired directly into the order books of:
 * Uniswap
 * PancakeSwap
 * Thorchain
+</Accordion>
 
 ### The 50ms Matrix
 

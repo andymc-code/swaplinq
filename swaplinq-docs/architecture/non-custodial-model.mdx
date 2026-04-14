@@ -7,6 +7,10 @@ Traditional centralized exchanges (CEX) hold user funds in centralized "hot wall
 
 SwaplinQ eliminates this attack vector entirely. When you initiate a swap, your funds enter the execution pipeline and are routed **directly** to the liquidity source. The output coins are broadcast immediately to your destination wallet. 
 
+<Frame>
+  <img src="/images/self-custody.png" alt="Self Custody Mechanism" />
+</Frame>
+
 <Info>
 At no point does SwaplinQ store, manage, or have access to your private keys or capital.
 </Info>
@@ -15,11 +19,23 @@ At no point does SwaplinQ store, manage, or have access to your private keys or 
 
 The lifecycle of a single atomic swap on SwaplinQ follows a strict, state-machine validated pipeline:
 
-1. **Quote Generation**: The `Routing Engine` queries 10+ providers in parallel and locks in the best rate.
-2. **Deposit Address Generation**: The `Execution Pipeline` creates a unique, single-use, non-reusable deposit wallet.
-3. **User Deposit**: You send funds directly from your self-custody wallet (MetaMask, Ledger, etc.) to the generated address.
-4. **Atomic Execution**: Once your deposit confirms on-chain, the swap triggers on the selected liquidity provider.
-5. **Output Broadcast**: The resulting crypto is immediately dispatched to your destination wallet.
+<Steps>
+  <Step title="Quote Generation">
+    The `Routing Engine` queries 10+ providers in parallel and locks in the best rate.
+  </Step>
+  <Step title="Deposit Address Generation">
+    The `Execution Pipeline` creates a unique, single-use, non-reusable deposit wallet.
+  </Step>
+  <Step title="User Deposit">
+    You send funds directly from your self-custody wallet (MetaMask, Ledger, etc.) to the generated address.
+  </Step>
+  <Step title="Atomic Execution">
+    Once your deposit confirms on-chain, the swap triggers on the selected liquidity provider.
+  </Step>
+  <Step title="Output Broadcast">
+    The resulting crypto is immediately dispatched to your destination wallet.
+  </Step>
+</Steps>
 
 ### Zero-Log Policy & Privacy
 
