@@ -3780,3 +3780,155 @@
     height: 40px;
   }
 }
+
+/* ═════════════════════════════════════════════════════════════ */
+/* INFRASTRUCTURE & LIQUIDITY PARTNERS PAGE                    */
+/* ═════════════════════════════════════════════════════════════ */
+
+.infra-page .page-header h1 span {
+  color: var(--accent-emerald);
+  -webkit-text-fill-color: var(--accent-emerald);
+}
+
+/* -- Routing Steps Grid -- */
+.infra-routing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+  position: relative;
+}
+
+.infra-step-card {
+  position: relative;
+  text-align: center;
+  padding: 36px 24px !important;
+}
+
+.infra-step-card .glow-icon {
+  margin: 0 auto 16px;
+}
+
+.infra-step-card h3 {
+  text-align: center;
+}
+
+.infra-step-card p {
+  text-align: center;
+  font-size: 13px;
+}
+
+.infra-step-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent-emerald);
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.infra-step-connector {
+  display: none;
+}
+
+/* -- Partners Grid -- */
+.infra-partners-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 48px;
+}
+
+.infra-partner-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.infra-partner-card h3 {
+  font-size: 20px;
+}
+
+.infra-partner-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.infra-feature-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  letter-spacing: 0.02em;
+}
+
+.infra-feature-chip svg {
+  color: var(--accent-emerald);
+  flex-shrink: 0;
+}
+
+/* -- Transparency Grid -- */
+.infra-transparency-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.infra-transparency-grid .engine-breakdown-card {
+  text-align: center;
+}
+
+.infra-transparency-grid .engine-breakdown-card .glow-icon {
+  margin: 0 auto 16px;
+}
+
+.infra-transparency-grid .engine-breakdown-card h3 {
+  text-align: center;
+}
+
+.infra-transparency-grid .engine-breakdown-card p {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* -- Responsive: Infrastructure -- */
+@media (max-width: 1100px) {
+  .infra-routing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .infra-partners-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .infra-transparency-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .infra-routing-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .infra-transparency-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

@@ -40,6 +40,7 @@ export const Navbar = () => {
                     <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Exchange</Link></li>
                     <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link></li>
                     <li><Link to="/faq" className={location.pathname === '/faq' ? 'active' : ''}>FAQ</Link></li>
+                    <li><Link to="/infrastructure" className={location.pathname === '/infrastructure' ? 'active' : ''}>Infrastructure</Link></li>
                     <li><a href="https://docs.swaplinq.com" className="active">API Docs</a></li>
                     <li className="dropdown">
                         <span className={`dropdown-trigger ${location.pathname.startsWith('/coins') ? 'active' : ''}`}>Coins <ChevronDown size={14} /></span>
@@ -71,6 +72,7 @@ export const Navbar = () => {
                         <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Exchange</Link>
                         <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link>
                         <Link to="/faq" className={location.pathname === '/faq' ? 'active' : ''}>FAQ</Link>
+                        <Link to="/infrastructure" className={location.pathname === '/infrastructure' ? 'active' : ''}>Infrastructure</Link>
                         <a href="https://docs.swaplinq.com" className="active">API Docs</a>
                         <Link to="/coins" className={location.pathname.startsWith('/coins') ? 'active' : ''}>Supported Coins</Link>
                     </motion.div>
@@ -101,6 +103,7 @@ export const Footer = () => {
                         <Link to="/about">About Us</Link>
                         <Link to="/faq">FAQ</Link>
                         <Link to="/how-it-works">How it Works</Link>
+                        <Link to="/infrastructure">Infrastructure</Link>
                         <Link to="/contact">Contact</Link>
                         <Link to="/blog">Blog</Link>
                         <Link to="/reviews">Reviews</Link>

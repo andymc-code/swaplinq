@@ -12,6 +12,7 @@ import CoinsList from './pages/CoinsList';
 import { Contact, Blog } from './pages/Sections';
 import Reviews from './pages/Reviews';
 import Documents from './pages/Documents';
+import Infrastructure from './pages/Infrastructure';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <Route path="/mobile-app" element={<PageLayout><HowItWorks /></PageLayout>} />
       <Route path="/api" element={<PageLayout><Documents /></PageLayout>} />
       <Route path="/documents" element={<PageLayout><Documents /></PageLayout>} />
+      <Route path="/infrastructure" element={<PageLayout><Infrastructure /></PageLayout>} />
       <Route path="/privacy" element={<PageLayout><About /></PageLayout>} />
       <Route path="/terms" element={<PageLayout><About /></PageLayout>} />
     </Routes>
